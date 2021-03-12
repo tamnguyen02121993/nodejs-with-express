@@ -1,0 +1,88 @@
+[{
+  "_id": {
+    "$oid": "6049d2f68244d93875d6fbe6"
+  },
+  "name": "Xây dựng web với NodeJS & ExpressJS",
+  "description": "Xây dựng web trong thực tế với NodeJS & ExpressJS với cách chia sẻ chi tiết, tận tâm, dễ hiểu và chất giọng giàu sức sống của người chia sẻ",
+  "image": "https://img.youtube.com/vi/z2f7RHgvddc/sddefault.jpg",
+  "slug": "nodejs",
+  "videoId": "LnTPJcUQdNU"
+},{
+  "_id": {
+    "$oid": "6049de488244d93875d6fbe7"
+  },
+  "name": "HTML, CSS từ zero đến Hero",
+  "description": "Khóa học đề cao việc thực hành qua những ví dụ trong thực tế giúp học viên nhanh chóng xây dựng được giao diện website",
+  "image": "https://img.youtube.com/vi/R6plN3FvzFY/sddefault.jpg",
+  "slug": "html-css",
+  "videoId": "LnTPJcUQdNU"
+},{
+  "_id": {
+    "$oid": "6049de9c8244d93875d6fbe8"
+  },
+  "name": "Xây dựng web responsive",
+  "description": "Khóa học này sẽ giúp bạn nắm chắc tư tưởng cốt lõi của việc xây dựng giao diện website responsive và áp dụng trong thực tế",
+  "image": "https://img.youtube.com/vi/uz5LIP85J5Y/sddefault.jpg",
+  "slug": "web-responsive",
+  "videoId": "LnTPJcUQdNU"
+},{
+  "_id": {
+    "$oid": "6049ded88244d93875d6fbe9"
+  },
+  "name": "Lập trình Javascript cơ bản (bản đầy đủ)",
+  "description": "Khóa học Javascript cơ bản dành cho mọi đối tượng bắt đầu học lập trình với nội dung ngắn gọn, dễ hiểu và hệ thống làm bài tập phong phú",
+  "image": "https://img.youtube.com/vi/0SJE9dYdpps/sddefault.jpg",
+  "slug": "javascript",
+  "videoId": "LnTPJcUQdNU"
+},{
+  "_id": {
+    "$oid": "6049df058244d93875d6fbea"
+  },
+  "name": "HTML, CSS tips",
+  "description": "Tutorials về HTML, CSS, UI, UX sẽ được tổng hợp tại khóa học này, các video có nội dung ngắn gọn, súc tích giúp học viên có thể ứng dụng ngay vào thực tế",
+  "image": "https://img.youtube.com/vi/nB6cJh_bb1U/sddefault.jpg",
+  "slug": "html-css-tips",
+  "videoId": "LnTPJcUQdNU"
+},{
+  "_id": {
+    "$oid": "6049df288244d93875d6fbeb"
+  },
+  "name": "[Machine learning] Ứng dụng cảnh báo khi sờ lên mặt",
+  "description": "Tutorials xây dựng ứng dụng \"Cảnh báo khi sờ tay lên mặt\" sử dụng mã nguồn mở TensorFlow cho Machine learning",
+  "image": "https://img.youtube.com/vi/r6GWbQL-qwA/sddefault.jpg",
+  "slug": "machine-learning",
+  "videoId": "LnTPJcUQdNU"
+},{
+  "_id": {
+    "$oid": "6049fa7822854e089c735ac8"
+  },
+  "name": "Lập trình mobile với React Native",
+  "description": "Lập trình mobile với React Native tại F8",
+  "videoId": "LnTPJcUQdNU",
+  "level": "cao",
+  "image": "https://img.youtube.com/vi/LnTPJcUQdNU/sddefault.jpg",
+  "createdAt": {
+    "$date": "2021-03-11T11:09:44.821Z"
+  },
+  "updatedAt": {
+    "$date": "2021-03-11T11:09:44.821Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6049fc10b9bb123d50024c8b"
+  },
+  "name": "Lập trình mobile với Flutter",
+  "description": "Lập trình mobile với Flutter tại F8",
+  "videoId": "LnTPJcUQdNU",
+  "level": "cao",
+  "image": "https://img.youtube.com/vi/LnTPJcUQdNU/sddefault.jpg",
+  "createdAt": {
+    "$date": "2021-03-11T11:16:32.205Z"
+  },
+  "updatedAt": {
+    "$date": "2021-03-11T11:16:32.205Z"
+  },
+  "slug": "lap-trinh-mobile-voi-flutter",
+  "__v": 0
+}]

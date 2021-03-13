@@ -29,7 +29,27 @@ class CoursesController {
 	// / [DELETE] /courses/:id
 	async delete(req, res, next) {
 		try {
+			await Course.delete({ _id: req.params.id });
+			res.redirect('back');
+		} catch (error) {
+			next(error);
+		}
+	}
+
+	// / [DELETE] /courses/:id/force
+	async forceDelete(req, res, next) {
+		try {
 			await Course.deleteOne({ _id: req.params.id });
+			res.redirect('back');
+		} catch (error) {
+			next(error);
+		}
+	}
+
+	// / [PATCH] /courses/:id/restore
+	async restore(req, res, next) {
+		try {
+			await Course.restore({ _id: req.params.id });
 			res.redirect('back');
 		} catch (error) {
 			next(error);
@@ -43,7 +63,7 @@ class CoursesController {
 				...req.body,
 				image: `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`,
 			});
-			res.redirect('/');
+			res.redirect('/me/stored/courses');
 		} catch (error) {
 			next(error);
 		}

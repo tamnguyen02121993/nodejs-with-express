@@ -1,26 +1,48 @@
-<div class="mt-4">
+<form class="mt-4" name="container-form" method="POST" action="/courses/handle-form-actions">
     <div>
         <a href="/me/stored/courses">Danh sách khóa học</a>
         <h3>Khóa học đã xóa</h3>
     </div>
 
+    <div class="mt-4 d-flex align-items-center">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
+            <label class="form-check-label" for="checkbox-all">
+                Chọn tất cả
+            </label>
+        </div>
+
+        <select class="custom-select mr-sm-2 form-control form-control-sm select-all-option" name="action" required>
+            <option value="">----- Chọn hành động -----</option>
+            <option value="restore">Khôi phục</option>
+            <option value="force-delete">Xóa vĩnh viễn</option>
+        </select>
+
+        <button class="btn btn-primary btn-sm btn-apply" disabled>Thực hiện</button>
+    </div>
+
     <table class="table table-bordered table-striped table-hover mt-4">
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col" colspan="2">#</th>
                 <th scope="col">Tên khóa học</th>
                 <th scope="col">Trình độ</th>
-                <th scope="col">Thời gian tạo</th>
+                <th scope="col">Thời gian xóa</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             {{#each courses}}
             <tr>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="courseIds[]" value="{{this._id}}">
+                    </div>
+                </td>
                 <th scope="row">{{sum @index 1}}</th>
                 <td>{{this.name}}</td>
                 <td>{{this.level}}</td>
-                <td>{{this.createdAt}}</td>
+                <td>{{this.deletedAt}}</td>
                 <td>
                     <a href="#" class="btn btn-link btn-restore" data-id="{{this._id}}">Khôi phục</a>
                     <a href="/courses/{{this._id}}/delete" class="btn btn-link" data-toggle="modal"
@@ -30,14 +52,14 @@
 
             {{else}}
             <tr>
-                <td colspan="5" class="text-center">
+                <td colspan="6" class="text-center">
                     Thùng rác trống
                 </td>
             </tr>
             {{/each}}
         </tbody>
     </table>
-</div>
+</form>
 
 <form name="delete-course-form" method="POST" class="mt-4"></form>
 <form name="restore-course-form" method="POST" class="mt-4"></form>
@@ -70,6 +92,9 @@
         const restoreForm = document.forms['restore-course-form']
         let buttonDeleteCourse = document.getElementById('btn-delete-course');
         let restoreButtons = $('.btn-restore');
+        const checkboxAll = $('#checkbox-all');
+        const courseItemsCheckbox = $('input[name="courseIds[]"]');
+        const btnApply = $('.btn-apply');
 
         $('#deleteCourseModal').on('show.bs.modal', function (event) {
             const button = $(event.relatedTarget)
@@ -81,11 +106,30 @@
             deleteForm.submit();
         })
 
-        restoreButtons.click(function(e) {
+        restoreButtons.click(function (e) {
             e.preventDefault();
             let courseId = $(this).data('id')
             restoreForm.action = `/courses/${courseId}/restore?_method=PATCH`
             restoreForm.submit();
         });
+
+
+        checkboxAll.change(function () {
+            courseItemsCheckbox.prop('checked', $(this).prop('checked'));
+            reRenderApplyBtn();
+        })
+
+
+        courseItemsCheckbox.change(function() {
+            const isCheckAll = courseItemsCheckbox.length === $('input[name="courseIds[]"]:checked').length
+            checkboxAll.prop('checked', isCheckAll);
+            reRenderApplyBtn();
+        })
+
+        function reRenderApplyBtn() {
+            const isSubmitable = $('input[name="courseIds[]"]:checked').length > 0;
+            btnApply.attr('disabled', !isSubmitable)
+        }
+
     })
 </script>

@@ -19,7 +19,12 @@ class CoursesController {
 	// / [PUT] /courses/:id
 	async update(req, res, next) {
 		try {
-			await Course.updateOne({ _id: req.params.id }, req.body);
+			await Course.updateOne(
+				{
+					_id: req.params.id,
+				},
+				req.body,
+			);
 			res.redirect('/me/stored/courses');
 		} catch (error) {
 			next(error);
@@ -74,6 +79,36 @@ class CoursesController {
 		try {
 			const course = await Course.findOne({ slug: req.params.slug });
 			res.render('courses/show', { course: mongooseToObject(course) });
+		} catch (error) {
+			next(error);
+		}
+	}
+
+	// / [POST] /courses/handle-form-actions
+	async handleFormActions(req, res, next) {
+		try {
+			switch (req.body.action) {
+				case 'delete':
+					await Course.delete({
+						_id: {
+							$in: req.body.courseIds,
+						},
+					});
+					res.redirect('back');
+					break;
+				case 'restore':
+					await Course.restore({ _id: { $in: req.body.courseIds } });
+					res.redirect('back');
+					break;
+				case 'force-delete':
+					await Course.deleteMany({
+						_id: { $in: req.body.courseIds },
+					});
+					res.redirect('back');
+					break;
+				default:
+					res.json({ message: 'Acion is invalid!' });
+			}
 		} catch (error) {
 			next(error);
 		}

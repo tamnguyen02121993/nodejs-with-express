@@ -4,9 +4,11 @@ class MeController {
 	// / [GET] /me/stored/courses
 	async storedCourses(req, res, next) {
 		try {
+			const deletedCount = await Course.countDocumentsDeleted();
 			const courses = await Course.find({});
 			res.render('me/stored-courses', {
 				courses: multipleMongooseToObject(courses),
+				deletedCount: deletedCount,
 			});
 		} catch (error) {
 			next(error);

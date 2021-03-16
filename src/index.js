@@ -6,6 +6,7 @@ const path = require('path');
 const route = require('./routes');
 const db = require('./config/db');
 const methodOverride = require('method-override');
+const SortMiddleware = require('./app/middlewares/SortMiddleware');
 const port = 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -20,6 +21,9 @@ app.use(morgan('combined'));
 // Method override: POST => PUT
 app.use(methodOverride('_method'));
 
+// Custom middlewares
+app.use(SortMiddleware);
+
 // Template Engine
 app.engine(
 	'hbs',
@@ -27,6 +31,26 @@ app.engine(
 		extname: '.hbs',
 		helpers: {
 			sum: (a, b) => a + b,
+			sortable: (field, sortObj) => {
+				const sortType =
+					field === sortObj.field ? sortObj.type : 'default';
+
+				const icons = {
+					default: 'fas fa-sort',
+					asc: 'fas fa-sort-up',
+					desc: 'fas fa-sort-down',
+				};
+
+				const types = {
+					default: 'desc',
+					asc: 'desc',
+					desc: 'asc',
+				};
+
+				const icon = icons[sortType];
+				const type = types[sortType];
+				return `<a href="?_sort&field=${field}&type=${type}"><i class="${icon}"></i></a>`;
+			},
 		},
 	}),
 );

@@ -5,9 +5,12 @@ class MeController {
 	async storedCourses(req, res, next) {
 		try {
 			const deletedCount = await Course.countDocumentsDeleted();
-			const courses = await Course.find({});
+			let courses = Course.find({});
+			if (req.query.hasOwnProperty('_sort')) {
+				courses = courses.sort({ [req.query.field]: req.query.type });
+			}
 			res.render('me/stored-courses', {
-				courses: multipleMongooseToObject(courses),
+				courses: multipleMongooseToObject(await courses),
 				deletedCount: deletedCount,
 			});
 		} catch (error) {
